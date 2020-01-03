@@ -51,36 +51,29 @@ char *read_textfile(char *filename)
  */
 char **tokenize(char *args)
 {
-	int pos = 0, buff, buff2;
+	int pos = 0;
 	char *len;
 	char **line;
 
 	line = malloc(sizeof(char *) * 2000);
 	if (line == NULL)
 	{
-		perror("malloc");
-		exit(1);
+		perror("Error: malloc failed");
+		exit(EXIT_FAILURE);
 	}
 
-	len = strtok(args, " \t\n\r");
-	while (len)
+	while (args)
 	{
-		line[pos] = len;
-		pos++;
-		len = strtok(NULL, " \t\n\r");
-	}
-	if (pos >= buff)
-	{
-		buff2 += PSH_BUFF_SIZE;
-		line = _realloc(line, sizeof(char *) * buff, sizeof(char *) * buff2);
-		if (line == NULL)
+		len = strtok(args, "\n");
+		while (len)
 		{
-			free(line);
-			return (NULL);
+			line[pos] = len;
+			pos++;
+			len = strtok(NULL, " \t\n\r");
 		}
+		line[pos] = NULL;
+		return (line);
 	}
-	line[pos] = NULL;
-	return (line);
 }
 
 
@@ -122,6 +115,7 @@ int i = 0;
 	{
 		buff_phrase = read_textfile(av[1]);
 		tokenizar = tokenize(buff_phrase);
+	printf("%s\n", tokenizar);
 	}
 	return (0);
 }

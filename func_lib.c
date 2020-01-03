@@ -11,6 +11,29 @@
 
 void *op_push(stack_t **stack, unsigned int num)
 {
+	stack_t *new;
+
+	new = malloc(sizeof(stack_t));
+	if (new == NULL)
+	{
+		perror("Error: malloc failed");
+		exit (EXIT_FAILURE);
+	}
+	if (*stack == NULL)
+	{
+		*stack = new;
+		new->n = n;
+		new->prev = NULL;
+		new->next = NULL;
+	}
+	else
+	{
+		new->n = n;
+		(*stack)->prev = new;
+		new->next = *stack;
+		new->prev = NULL;
+		*head = new;
+	}
 }
 
 /**¬
