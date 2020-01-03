@@ -51,6 +51,7 @@ char *read_textfile(char *filename)
  *
  * Return: double pointer of the arrays of strings
  */
+
 char **tokenize(char *args)
 {
 	int pos = 0;
@@ -78,46 +79,3 @@ char **tokenize(char *args)
 	}
 }
 
-
-/**
- * main - check the code for Holberton School students.
- *
- * Return: Always 0.
- */
-
-int main(int ac, char **av)
-{
-	{
-		instruction_t ops[] = {¬
-			{"push", op_push},¬
-			{"pop", op_pop},¬
-			{"pall", op_pall},¬
-			{"swap", op_swap},¬
-			{"pint", op_pint},¬
-			{NULL, NULL}¬
-	};
-int i = 0;
-
-			while (i <= 4)¬
-		{
-			if (ops[i].opcode[0] == *s)¬
-		{
-		return (ops[i].f(stack, );¬
-	}
-	i++;
-	}
-	return (NULL);
-}
-	if (ac != 2)
-	{
-		perror("USAGE: monty file\n");
-		EXIT_FAILURE;
-	}
-	else
-	{
-		buff_phrase = read_textfile(av[1]);
-		tokenizar = tokenize(buff_phrase);
-	printf("%s\n", tokenizar);
-	}
-	return (0);
-}
