@@ -9,7 +9,7 @@
  *Return: Always
  */
 
-void *op_push(stack_t **stack, unsigned int line_number)
+void *op_push(stack_t **stack, unsigned int num)
 {
 }
 
@@ -20,7 +20,7 @@ void *op_push(stack_t **stack, unsigned int line_number)
   9  *Return: Always¬
  10  */
 
-void *op_pop(stack_t **stack, unsigned int line_number)
+void *op_pop(stack_t **stack, unsigned int num)
 {
 }
 
@@ -30,7 +30,7 @@ void *op_pop(stack_t **stack, unsigned int line_number)
   8  *@line number: number to manipulate¬
   9  *Return: Always¬
  10  */
-void *op_pall(stack_t **stack, unsigned int line_number)
+void *op_pall(stack_t **stack, unsigned int num)
 {
 }
 
@@ -41,7 +41,7 @@ void *op_pall(stack_t **stack, unsigned int line_number)
 *Return: Always¬
 */
 
-void *op_pint(stack_t **stack, unsigned int line_number)
+void *op_pint(stack_t **stack, unsigned int num)
 {
 }
 
@@ -52,7 +52,7 @@ void *op_pint(stack_t **stack, unsigned int line_number)
 *Return: Always¬
 */
 
-void *op_swap(stack_t **stack, unsigned int line_number)
+void *op_swap(stack_t **stack, unsigned int num)
 {
 }
 
@@ -63,6 +63,6 @@ void *op_swap(stack_t **stack, unsigned int line_number)
   9  *Return: Always¬
  10  */
 
-void *op_add(stack_t **stack, unsigned int line_number)
+void *op_add(stack_t **stack, unsigned int num)
 {
 }
