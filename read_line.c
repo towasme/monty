@@ -25,13 +25,15 @@ char *read_textfile(char *filename)
 		fd = open(filename, O_RDONLY);
 		if (fd == -1)
 		{
-			return (0);
+			fprintf(stderr, "Error: Can't open file %s\n", filename);
+			exit (EXIT_FAILURE);
 		}
 	}
 	buff = malloc(sizeof(char) * 2000);
 	if (buff == NULL)
 	{
-		return (0);
+		perror("Error: malloc failed");
+		exit (EXIT_FAILURE);
 	}
 	read_file = read(fd, buff, 2000);
 	if (read_file == -1)

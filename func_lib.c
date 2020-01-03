@@ -22,17 +22,17 @@ void *op_push(stack_t **stack, unsigned int num)
 	if (*stack == NULL)
 	{
 		*stack = new;
-		new->n = n;
+		new->n = num;
 		new->prev = NULL;
 		new->next = NULL;
 	}
 	else
 	{
-		new->n = n;
+		new->n = num;
 		(*stack)->prev = new;
 		new->next = *stack;
 		new->prev = NULL;
-		*head = new;
+		*stack = new;
 	}
 }
 
