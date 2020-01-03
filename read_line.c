@@ -1,4 +1,4 @@
-#include "holberton.h"
+#include "monty.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -9,14 +9,12 @@
 /**
  *read_textfile - program that reads a file
  *@filename: The character to print
- *@letters: number of letters it prints
- *Return: On success 1.
+ *Return: bytes read
  */
-ssize_t read_textfile(const char *filename, size_t letters)
+char *read_textfile(char *filename)
 {
-	ssize_t fd;
+	ssize_t fd, read_file;
 	char *buff;
-	ssize_t fd_write, n_bytes;
 
 	if (filename == NULL)
 	{
@@ -30,28 +28,60 @@ ssize_t read_textfile(const char *filename, size_t letters)
 			return (0);
 		}
 	}
-	buff = malloc(sizeof(size_t) * letters);
+	buff = malloc(sizeof(char) * 2000);
 	if (buff == NULL)
 	{
 		return (0);
 	}
-	n_bytes = read(fd, buff, letters);
-	if (n_bytes == -1)
+	read_file = read(fd, buff, 2000);
+	if (read_file == -1)
 	{
 		free(buff);
 		return (0);
 	}
-	else
+	close(fd);
+	return (buff);
+}
+
+/**
+ * tokenize - splits a string into different argumnets
+ * @args: string with the arguments to be tokenize
+ *
+ * Return: double pointer of the arrays of strings
+ */
+char **tokenize(char *args)
+{
+	int pos = 0, buff, buff2;
+	char *len;
+	char **line;
+
+	line = malloc(sizeof(char *) * 2000);
+	if (line == NULL)
 	{
-		fd_write = write(STDOUT_FILENO, buff, n_bytes);
-		if (fd_write == -1)
+		perror("malloc");
+		exit(1);
+	}
+
+	len = strtok(args, " \t\n\r");
+	while (len)
+	{
+		line[pos] = len;
+		pos++;
+		len = strtok(NULL, " \t\n\r");
+	}
+	if (pos >= buff)
+	{
+		buff2 += PSH_BUFF_SIZE;
+		line = _realloc(line, sizeof(char *) * buff, sizeof(char *) * buff2);
+		if (line == NULL)
 		{
-			free(buff);
-			return (0);
+			free(line);
+			return (NULL);
 		}
 	}
-	close(fd);
-	return ();
+	line[pos] = NULL;
+	return (line);
+}
 
 
 /**
@@ -62,8 +92,36 @@ ssize_t read_textfile(const char *filename, size_t letters)
 
 int main(int ac, char **av)
 {
-	frase = read_textfile(av[1]);
-	tokenizar = strtok(frase);
+	{
+		instruction_t ops[] = {¬
+			{"push", op_push},¬
+			{"pop", op_pop},¬
+			{"pall", op_pall},¬
+			{"swap", op_swap},¬
+			{"pint", op_pint},¬
+			{NULL, NULL}¬
+	};
+int i = 0;
 
-
+			while (i <= 4)¬
+		{
+			if (ops[i].opcode[0] == *s)¬
+		{
+		return (ops[i].f(stack, );¬
+	}
+	i++;
+	}
+	return (NULL);
+}
+	if (ac != 2)
+	{
+		perror("USAGE: monty file\n");
+		EXIT_FAILURE;
+	}
+	else
+	{
+		buff_phrase = read_textfile(av[1]);
+		tokenizar = tokenize(buff_phrase);
+	}
+	return (0);
 }

@@ -38,5 +38,5 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-ssize_t read_textfile(const char *filename, size_t letters);
+ssize_t read_textfile(char *filename);
 
