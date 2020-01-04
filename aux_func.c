@@ -9,23 +9,20 @@
 *Return: Always¬
 */
 
-void *op_add(stack_t **stack, unsigned int num)
+void op_add(stack_t **stack, unsigned int num)
 {
-	UNUSED (num);
 	int sum_num = 0;
-	stack_t *aux;
+	stack_t *aux = *stack;
 
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
-		fprintf(stderr, "L<line_number>: can't add, stack too short");
+		fprintf(stderr, "L %d : can't add, stack too short\n", num);
 		exit (EXIT_FAILURE);
 	}
-	else
-	{
+
 	sum_num = (*stack)->n;
 	(*stack)->next->n += sum_num;
-	*stack = aux->next;¬
-	(*stack)->prev = NULL;¬
+	*stack = aux->next;
+	(*stack)->prev = NULL;
 	free(aux);
-	}
 }

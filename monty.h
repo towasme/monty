@@ -7,8 +7,9 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <string.h>
 
-int num_error = 0;
+extern int num_error;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -40,13 +41,15 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-char *read_textfile(char *filename);
+void read_textfile(char *filename, stack_t **stack);
 char **tokenize(char *args);
-void *op_push(stack_t **stack, unsigned int num);
-void *op_pop(stack_t **stack, unsigned int num);
-void *op_pall(stack_t **stack, unsigned int num);
-void *op_pint(stack_t **stack, unsigned int num);
-void *op_swap(stack_t **stack, unsigned int num);
-void *op_add(stack_t **stack, unsigned int num);
+void compare_string(char *buff, stack_t **stack, int contador);
+
+void op_push(stack_t **stack, unsigned int num);
+void op_pop(stack_t **stack, unsigned int num);
+void op_pall(stack_t **stack, unsigned int num);
+void op_pint(stack_t **stack, unsigned int num);
+void op_swap(stack_t **stack, unsigned int num);
+void op_add(stack_t **stack, unsigned int num);
 
 #endif

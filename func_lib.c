@@ -9,18 +9,18 @@
  *Return: Always
  */
 
-void *op_push(stack_t **stack, unsigned int num)
+void op_push(stack_t **stack, unsigned int num)
 {
-	stack_t *new;
+	stack_t *new = malloc(sizeof(stack_t));
+	(void)num;
 
-	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
 		perror("Error: malloc failed");
 		exit (EXIT_FAILURE);
 	}
 	if (*stack == NULL)
-	{
+		{
 		*stack = new;
 		new->n = num_error;
 		new->prev = NULL;
@@ -42,14 +42,13 @@ void *op_push(stack_t **stack, unsigned int num)
   9  *Return: Always¬
  10  */
 
-void *op_pop(stack_t **stack, unsigned int num)
+void op_pop(stack_t **stack, unsigned int num)
 {
 	stack_t *aux = *stack;
-	UNUSED (num);
 
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
-		fprintf(stderr, "L<line_number>: can't pop an empty stack\n")
+		fprintf(stderr, "L %d: can't pop an empty stack\n", num);
 		exit (EXIT_FAILURE);
 	}
 	else
@@ -67,16 +66,19 @@ void *op_pop(stack_t **stack, unsigned int num)
 *Return: Always¬
 */
 
-void *op_pall(stack_t **stack, unsigned int num)
+void op_pall(stack_t **stack, unsigned int num)
 {
 	int counter = 0;
-	UNUSED (num);
+	(void)num;
 
-	while (stack)
+	if (stack != NULL)
 	{
-		printf("%d\n", (*stack)->n);
-		*stack = (*stack)->next;
-		counter++;
+		while (stack)
+		{
+			printf("%d\n", (*stack)->n);
+			*stack = (*stack)->next;
+			counter++;
+		}
 	}
 }
 
@@ -87,13 +89,11 @@ void *op_pall(stack_t **stack, unsigned int num)
 *Return: Always¬
 */
 
-void *op_pint(stack_t **stack, unsigned int num)
+void op_pint(stack_t **stack, unsigned int num)
 {
-	UNUSED (num);
-
 	if (*stack == NULL)
 	{
-		fprintf(stderr, "L<line_number>: can't pint, stack empty\n");
+		fprintf(stderr, "L %d: can't pint, stack empty\n", num);
 		exit (EXIT_FAILURE);
 	}
 	else
@@ -110,20 +110,21 @@ void *op_pint(stack_t **stack, unsigned int num)
 *Return: Always¬
 */
 
-void *op_swap(stack_t **stack, unsigned int num)
+void op_swap(stack_t **stack, unsigned int num)
 {
-	UNUSED (num);
-	int num_swap = 0;
+	int num_swap;
+
+	num_swap = 0;
 
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
-		fprintf(stderr, "L<line_number>: can't swap, stack too short");
+		fprintf(stderr, "L %d: can't swap, stack too short\n", num);
 		exit (EXIT_FAILURE);
 	}
 	else
 	{
 		num_swap = (*stack)->n;
 		(*stack)->n = (*stack)->next->n;
-		(*stack)->next->n = num_swap
+		(*stack)->next->n = num_swap;
 	}
 }
