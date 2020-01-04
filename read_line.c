@@ -56,7 +56,7 @@ char **tokenize(char *args)
 	if (lines == NULL)
 	{
 		perror("Error: malloc failed");
-		exit(EXIT_FAILURE);
+		exit (EXIT_FAILURE);
 	}
 
 	len = strtok(args, " \n");
@@ -66,11 +66,12 @@ char **tokenize(char *args)
 	}
 	while (len)
 	{
+		printf("%d %s\n", pos, len);
 		lines[pos] = len;
 		len = strtok(NULL, " \n");
 		pos++;
 	}
-	lines[pos] = NULL;
+/*	lines[pos] = NULL;*/
 	return (lines);
 }
 
@@ -96,9 +97,9 @@ void compare_string(char *buff, stack_t **stack, int contador)
 	};
 
 	lines = tokenize(buff);
-	printf("%s\n", lines[0]);
+/*	printf("%s\n", lines[0]);*/
 	num_error = atoi(lines[1]);
-	printf("%d\n", num_error);
+/*	printf("%d\n", num_error);*/
 
 	while (ops[i].opcode)
 	{

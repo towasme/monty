@@ -20,7 +20,7 @@ void op_push(stack_t **stack, unsigned int num)
 		exit (EXIT_FAILURE);
 	}
 	if (*stack == NULL)
-		{
+	{
 		*stack = new;
 		new->n = num_error;
 		new->prev = NULL;
