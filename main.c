@@ -11,27 +11,7 @@
 int main(int ac, char **av)
 {
 	char *buff_phrase = NULL;
-
-	{
-		instruction_t ops[] = {¬
-			{"push", op_push},¬
-			{"pop", op_pop},¬
-			{"pall", op_pall},¬
-			{"swap", op_swap},¬
-			{"pint", op_pint},¬
-			{NULL, NULL}¬
-	};
-int i = 0;
-
-			while (i <= 4)¬
-		{
-			if (strcmp(ops[i].opcode, *s) == 0)¬
-		{
-		return (ops[i].f(stack, );¬
-	}
-	i++;
-	}
-}
+	stack_t *stack = NULL;
 
 	if (ac != 2)
 	{
@@ -40,7 +20,7 @@ int i = 0;
 	}
 	else
 	{
-		buff_phrase = read_textfile(av[1]);
+		buff_phrase = read_textfile(av[1], &stack);
 		printf("%s", buff_phrase);
 /*		tokenizar = tokenize(buff_phrase);
 	printf("%s\n", tokenizar);*/

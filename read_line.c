@@ -11,37 +11,46 @@
  *@filename: The character to print
  *Return: bytes read
  */
-char *read_textfile(char *filename)
+char *read_textfile(char *filename, stack_t **stack)
 {
-	ssize_t fd, read_file;
-	char *buff;
+	FILE *fd;
+	size_t size = 0;
+	char *buff = malloc(sizeof(char) * 2000);
+	int contador = 0;
 
 	if (filename == NULL)
 	{
-		return (0);
+		perror("USAGE: monty file");
+		exit (EXIT_FAILURE);
 	}
 	else
 	{
-		fd = open(filename, O_RDONLY);
+		fd = fopen(filename, O_RDONLY);
 		if (fd == -1)
 		{
 			fprintf(stderr, "Error: Can't open file %s\n", filename);
 			exit (EXIT_FAILURE);
 		}
 	}
-	buff = malloc(sizeof(char) * 2000);
 	if (buff == NULL)
 	{
 		perror("Error: malloc failed");
 		exit (EXIT_FAILURE);
 	}
-	read_file = read(fd, buff, 2000);
+	while (getline(&buff, &size, fd) != EOF)
+	{
+		contador++;
+		compare_string(buff, contador, stack);
+	}
+/*
+	read_file = fread(fd, buff, 2000);
 	if (read_file == -1)
 	{
 		free(buff);
 		return (0);
 	}
-	close(fd);
+*/
+	fclose(fd);
 	return (buff);
 }
 
@@ -56,26 +65,63 @@ char **tokenize(char *args)
 {
 	int pos = 0;
 	char *len;
-	char **line;
+	char **lines;
 
-	line = malloc(sizeof(char *) * 2000);
-	if (line == NULL)
+	lines = malloc(sizeof(char *) * 64);
+	if (lines == NULL)
 	{
 		perror("Error: malloc failed");
 		exit(EXIT_FAILURE);
 	}
 
-	while (args)
-	{
-		len = strtok(args, "\n");
+	len = strtok(args, " \n");
 		while (len)
 		{
-			line[pos] = len;
+			lines[pos] = len;
+			len = strtok(NULL, " \n");
 			pos++;
-			len = strtok(NULL, " \t\n\r");
 		}
-		line[pos] = NULL;
-		return (line);
+		lines[pos] = NULL;
+		return (lines);
 	}
 }
+
+/**
+ * compare_string - splits a string into different argumnets
+ * @buff: string with the arguments to be tokenize
+ *
+ * Return: double pointer of the arrays of strings
+ */
+void compare_string(char *buff, stack_t **stack, int contador)
+{
+	char **lines = NULL;
+	int i;
+
+		instruction_t ops[] = {¬
+			{"push", op_push},¬
+			{"pop", op_pop},¬
+			{"pall", op_pall},¬
+			{"swap", op_swap},¬
+			{"pint", op_pint},¬
+			{NULL, NULL}¬
+	};
+
+	lines = tokenize(buff);
+	num_error = atoi(lines[1]);
+
+	if (lines[0] == NULL)
+	{
+	}
+	for (i = 0; i < 6; i++)
+	{
+		if (strcmp(lines[0], ops[i].opcode) == 0)
+		{
+			ops[i].f(stack, contador);
+		}
+	}
+}
+
+
+
+
 

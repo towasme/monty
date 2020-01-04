@@ -41,12 +41,12 @@ typedef struct instruction_s
 } instruction_t;
 
 char *read_textfile(char *filename);
-/*char **tokenize(char *args);
+char **tokenize(char *args);
 void *op_push(stack_t **stack, unsigned int num);
 void *op_pop(stack_t **stack, unsigned int num);
 void *op_pall(stack_t **stack, unsigned int num);
 void *op_pint(stack_t **stack, unsigned int num);
 void *op_swap(stack_t **stack, unsigned int num);
 void *op_add(stack_t **stack, unsigned int num);
-*/
+
 #endif
