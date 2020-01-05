@@ -26,3 +26,16 @@ void op_add(stack_t **stack, unsigned int num)
 	(*stack)->prev = NULL;
 	free(aux);
 }
+
+/**
+*op_nop - does not do anything
+*@stack: pointer
+*@num: number to manipulate
+*Return: void
+*/
+
+void op_nop(stack_t **stack, unsigned int num)
+{
+	(void) stack;
+	(void) num;
+}

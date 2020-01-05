@@ -15,7 +15,7 @@ void read_textfile(char *filename, stack_t **stack)
 {
 	FILE *fd;
 	size_t size = 0;
-	char *buff = malloc(sizeof(char) * 2000);
+	char *buff = NULL;
 	int contador = 0;
 
 	fd = fopen(filename, "r");
@@ -24,7 +24,7 @@ void read_textfile(char *filename, stack_t **stack)
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit (EXIT_FAILURE);
 	}
-
+	buff = malloc(sizeof(char) * 2000);
 	if (buff == NULL)
 	{
 		perror("Error: malloc failed");
@@ -92,7 +92,8 @@ void compare_string(char *buff, stack_t **stack, int contador)
 			{"pall", op_pall},
 /*			{"pop", op_pop},
 			{"swap", op_swap},
-			{"pint", op_pint},*/
+			{"pint", op_pint},
+			("nop", op_nop},*/
 			{NULL, NULL}
 	};
 
@@ -109,6 +110,9 @@ void compare_string(char *buff, stack_t **stack, int contador)
 		}
 		i++;
 	}
+	fprintf(stderr, "L%d: unknown instruction %s\n", contador, lines[0]);
+	free(lines);
+	exit(EXIT_FAILURE);
 }
 
 

@@ -15,7 +15,7 @@ int main(int ac, char **av)
 	if (ac != 2)
 	{
 		perror("USAGE: monty file\n");
-		EXIT_FAILURE;
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
