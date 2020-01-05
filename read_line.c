@@ -79,12 +79,6 @@ char **tokenize(char *args)
 		len = strtok(NULL, " \n");
 		pos++;
 	}
-/*
-	printf("token:%s numero:%s\n", lines[0], lines[1]);
-	new_lines = verif_second_string(lines);
-	printf("token:%s numero:%s\n", new_lines[0], new_lines[1]);
-*/
-/*	lines[pos] = NULL;*/
 	return (lines);
 }
 
@@ -144,14 +138,14 @@ void compare_string(char *buff, stack_t **stack, int contador)
 		free_grid(lines);
 		exit(EXIT_FAILURE);
 	}
-/*
+
 	printf("token: %s y numero: %s\n", lines[0], lines[1]);
-	if ((strcmp("push", lines[0]) == 0) && (ver_str(lines[1]) == 0))
+	if ((strcmp("push", lines[0]) == 0) && (ver_str(lines) == 0))
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", contador);
-		free_grid(lines);
+/*		free_grid(lines);*/
 		exit(EXIT_FAILURE);
-*/
+	}
 	free(lines);
 /*	free_grid(lines);*/
 }
