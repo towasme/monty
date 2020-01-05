@@ -15,10 +15,8 @@ void op_push(stack_t **stack, unsigned int num)
 	(void)num;
 
 	if (new == NULL)
-	{
-		perror("Error: malloc failed");
-		exit (EXIT_FAILURE);
-	}
+		{perror("Error: malloc failed");
+		exit(EXIT_FAILURE); }
 	if (*stack == NULL)
 	{
 		*stack = new;
@@ -35,12 +33,13 @@ void op_push(stack_t **stack, unsigned int num)
 		*stack = new;
 	}
 }
-/**¬
-  6  *op_pop - calls different functions¬
-  7  *@stack: pointer¬
-  8  *@num: number to manipulate¬
-  9  *Return: Always¬
- 10  */
+
+/**
+ *op_pop - calls different functions
+ *@stack: pointer
+ *@num: number to manipulate
+ *Return: Always
+ */
 
 void op_pop(stack_t **stack, unsigned int num)
 {
@@ -48,8 +47,8 @@ void op_pop(stack_t **stack, unsigned int num)
 
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
-		fprintf(stderr, "L %d: can't pop an empty stack\n", num);
-		exit (EXIT_FAILURE);
+		fprintf(stderr, "L%d: can't pop an empty stack\n", num);
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
@@ -59,42 +58,43 @@ void op_pop(stack_t **stack, unsigned int num)
 	}
 }
 
-/**¬
-*op_pall - calls different functions¬
-*@stack: pointer¬
-*@num: number to manipulate¬
-*Return: Always¬
+/**
+ *op_pall - prints the double linked list
+ *@stack: pointer
+ *@num: number to manipulate
+ *Return: void
 */
 
 void op_pall(stack_t **stack, unsigned int num)
 {
 	int counter = 0;
+	stack_t *aux = *stack;
 	(void)num;
 
 	if (stack != NULL)
 	{
-		while (stack)
+		while (aux)
 		{
-			printf("%d\n", (*stack)->n);
-			*stack = (*stack)->next;
+			printf("%d\n", aux->n);
+			aux = aux->next;
 			counter++;
 		}
 	}
 }
 
-/**¬
-*op_pint - calls different functions¬
-*@stack: pointer¬
-*@num: number to manipulate¬
-*Return: Always¬
+/**
+ *op_pint - calls different functions
+ *@stack: pointer
+ *@num: number to manipulate
+ *Return: Always
 */
 
 void op_pint(stack_t **stack, unsigned int num)
 {
 	if (*stack == NULL)
 	{
-		fprintf(stderr, "L %d: can't pint, stack empty\n", num);
-		exit (EXIT_FAILURE);
+		fprintf(stderr, "L%d: can't pint, stack empty\n", num);
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
@@ -103,11 +103,11 @@ void op_pint(stack_t **stack, unsigned int num)
 }
 
 
-/**¬
-*op_swap - calls different functions¬
-*@stack: pointer¬
-*@num: number to manipulate¬
-*Return: Always¬
+/**
+ *op_swap - calls different functions
+ *@stack: pointer
+ *@num: number to manipulate
+ *Return: Always
 */
 
 void op_swap(stack_t **stack, unsigned int num)
@@ -118,8 +118,8 @@ void op_swap(stack_t **stack, unsigned int num)
 
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
-		fprintf(stderr, "L %d: can't swap, stack too short\n", num);
-		exit (EXIT_FAILURE);
+		fprintf(stderr, "L%d: can't swap, stack too short\n", num);
+		exit(EXIT_FAILURE);
 	}
 	else
 	{

@@ -9,6 +9,7 @@
 /**
  *read_textfile - program that reads a file
  *@filename: The character to print
+ *@stack: stack to work with
  *Return: bytes read
  */
 void read_textfile(char *filename, stack_t **stack)
@@ -22,18 +23,22 @@ void read_textfile(char *filename, stack_t **stack)
 	if (fd == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 	buff = malloc(sizeof(char) * 2000);
 	if (buff == NULL)
 	{
 		perror("Error: malloc failed");
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 	while (getline(&buff, &size, fd) != EOF)
 	{
-		contador++;
-		compare_string(buff, stack, contador);
+		if (strcmp(buff, "\n") != 0)
+		{
+/*			printf("%sbuff si es nullo", buff);*/
+			contador++;
+			compare_string(buff, stack, contador);
+		}
 	}
 	fclose(fd);
 	free(buff);
@@ -50,27 +55,35 @@ char **tokenize(char *args)
 {
 	int pos = 0;
 	char *len;
-	char **lines;
+	char **lines = NULL;
 
 	lines = malloc(sizeof(char *) * 64);
 	if (lines == NULL)
 	{
 		perror("Error: malloc failed");
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 
 	len = strtok(args, " \n");
+/*	printf("%slen si es nullo", len);*/
 	if (len == NULL)
 	{
+/*		printf("%slines si es nullo", lines[0]);*/
+		free(len);
 		return (NULL);
 	}
 	while (len)
 	{
-		printf("%d %s\n", pos, len);
+/*		printf("tokens de la linea [%d] token correspondiente:%s\n", pos, len);*/
 		lines[pos] = len;
 		len = strtok(NULL, " \n");
 		pos++;
 	}
+/*
+	printf("token:%s numero:%s\n", lines[0], lines[1]);
+	new_lines = verif_second_string(lines);
+	printf("token:%s numero:%s\n", new_lines[0], new_lines[1]);
+*/
 /*	lines[pos] = NULL;*/
 	return (lines);
 }
@@ -79,43 +92,96 @@ char **tokenize(char *args)
 /**
  * compare_string - splits a string into different argumnets
  * @buff: string with the arguments to be tokenize
- *
+ * @stack: stack to work with
+ * @contador: counter to store the line number
  * Return: double pointer of the arrays of strings
  */
 void compare_string(char *buff, stack_t **stack, int contador)
 {
 	char **lines = NULL;
-	int i = 0;
+	int i = 0, cont_no_match = 0;
 
 		instruction_t ops[] = {
 			{"push", op_push},
 			{"pall", op_pall},
-/*			{"pop", op_pop},
-			{"swap", op_swap},
-			{"pint", op_pint},
-			("nop", op_nop},*/
+/*
+*			{"pop", op_pop},
+*			{"swap", op_swap},
+*			{"pint", op_pint},
+*			("nop", op_nop},
+*/
 			{NULL, NULL}
 	};
-
 	lines = tokenize(buff);
-/*	printf("%s\n", lines[0]);*/
-	num_error = atoi(lines[1]);
-/*	printf("%d\n", num_error);*/
-
-	while (ops[i].opcode)
+/*	printf("%slines si es nullo", lines[0]);*/
+	while ((ops[i].opcode != NULL && lines[0] != NULL && i <= 5) && (ver_str(lines) == 1))
 	{
-		if (strcmp(lines[0], ops[i].opcode) == 0)
+		if (strcmp(ops[i].opcode, lines[0]) == 0)
 		{
-			ops[i].f(stack, contador);
+			if (strcmp("pall", lines[0]) == 0)
+			{
+				ops[1].f(stack, contador);
+				break;
+			}
+			else
+			{
+/*				printf("string compare %s\n", lines[0]);*/
+				num_error = atoi(lines[1]);
+				ops[i].f(stack, contador);
+				break;
+				printf("%d\n", num_error);
+			}
 		}
-		i++;
+		else
+		{
+			cont_no_match++; }
+	i++;
 	}
-	fprintf(stderr, "L%d: unknown instruction %s\n", contador, lines[0]);
+	if (cont_no_match == 2)
+	{
+/*		printf("No concoe el comando %s que imprime la linea 0", lines[0]);*/
+		fprintf(stderr, "L%d: unknown instruction %s\n", contador, lines[0]);
+		free_grid(lines);
+		exit(EXIT_FAILURE);
+	}
+/*
+	printf("token: %s y numero: %s\n", lines[0], lines[1]);
+	if ((strcmp("push", lines[0]) == 0) && (ver_str(lines[1]) == 0))
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", contador);
+		free_grid(lines);
+		exit(EXIT_FAILURE);
+*/
 	free(lines);
-	exit(EXIT_FAILURE);
+/*	free_grid(lines);*/
 }
 
+/**
+ *verif_second_string - calls different functions
+ *@lines: pointer
+ *Return: Always
+ */
+int ver_str(char **lines)
+{
+	int i = 0;
 
+	while (lines[1][i])
+	{
+		if (strcmp(lines[0], "pall") == 0)
+		{
+			return (1);
+		}
+		if ((lines[1][i] >= 48 && lines[1][i] <= 57) || (lines[1][0] == '-'))
+		{
+			i++;
+		}
+		else
+		{
+			return (0);
+		}
+	}
+	return (1);
+}
 
 
 

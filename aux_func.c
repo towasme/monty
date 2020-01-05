@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/**¬
-*op_add - calls different functions¬
-*@stack: pointer¬
-*@num: number to manipulate¬
-*Return: Always¬
+/**
+ *op_add - adds the first two nodes
+ *@stack: pointer
+ *@num: number to manipulate
+ *Return: void
 */
 
 void op_add(stack_t **stack, unsigned int num)
@@ -16,8 +16,8 @@ void op_add(stack_t **stack, unsigned int num)
 
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
-		fprintf(stderr, "L %d : can't add, stack too short\n", num);
-		exit (EXIT_FAILURE);
+		fprintf(stderr, "L%d : can't add, stack too short\n", num);
+		exit(EXIT_FAILURE);
 	}
 
 	sum_num = (*stack)->n;
@@ -38,4 +38,27 @@ void op_nop(stack_t **stack, unsigned int num)
 {
 	(void) stack;
 	(void) num;
+}
+
+/**
+ *free_grid - frees an array of pointers
+ *@grid: array of pointers
+ *
+ *Return: Always
+ */
+
+void free_grid(char **grid)
+{
+	int i = 0;
+
+	if (!grid)
+	{
+		return;
+	}
+	while (grid[i])
+	{
+		free(grid[i]);
+		i++;
+	}
+	free(grid);
 }

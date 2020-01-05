@@ -1,10 +1,11 @@
 #include "monty.h"
 #include <stdio.h>
 
-int num_error = 0;
+
 /**
  * main - check the code for Holberton School students.
- *
+ *@ac: number of arguments passed
+ *@av: arguments
  * Return: Always 0.
  */
 
@@ -20,9 +21,6 @@ int main(int ac, char **av)
 	else
 	{
 		read_textfile(av[1], &stack);
-/*		printf("%s", buff_phrase);
-		tokenizar = tokenize(buff_phrase);
-	printf("%s\n", tokenizar);*/
 	}
 	return (0);
 }
