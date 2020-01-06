@@ -62,3 +62,31 @@ void free_grid(char **grid)
 	}
 	free(grid);
 }
+
+/**
+ *verif_second_string - calls different functions
+ *@lines: pointer
+ *Return: Always
+ */
+int ver_str(char **lines)
+{
+	int i = 0;
+
+	while (lines[1][i])
+	{
+		if (strcmp(lines[0], "pall") == 0)
+		{
+			return (1);
+		}
+		if ((lines[1][i] >= 48 && lines[1][i] <= 57) || (lines[1][0] == '-'))
+		{
+			i++;
+		}
+		else
+		{
+			return (0);
+		}
+	}
+	return (1);
+}
+

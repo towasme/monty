@@ -64,7 +64,7 @@ char **tokenize(char *args)
 		exit(EXIT_FAILURE);
 	}
 
-	len = strtok(args, " \n");
+	len = strtok(args, " \n\t");
 /*	printf("%slen si es nullo", len);*/
 	if (len == NULL)
 	{
@@ -91,8 +91,7 @@ char **tokenize(char *args)
  * Return: double pointer of the arrays of strings
  */
 void compare_string(char *buff, stack_t **stack, int contador)
-{
-	char **lines = NULL;
+{char **lines = NULL;
 	int i = 0, cont_no_match = 0;
 
 		instruction_t ops[] = {
@@ -107,75 +106,29 @@ void compare_string(char *buff, stack_t **stack, int contador)
 			{NULL, NULL}
 	};
 	lines = tokenize(buff);
-/*	printf("%slines si es nullo", lines[0]);*/
-	while ((ops[i].opcode != NULL && lines[0] != NULL && i <= 5) && (ver_str(lines) == 1))
+	while (ops[i].opcode != NULL && lines[0] != NULL && ver_str(lines) == 1)
 	{
 		if (strcmp(ops[i].opcode, lines[0]) == 0)
 		{
 			if (strcmp("pall", lines[0]) == 0)
-			{
-				ops[1].f(stack, contador);
-				break;
-			}
+			{ops[1].f(stack, contador); }
 			else
-			{
-/*				printf("string compare %s\n", lines[0]);*/
-				num_error = atoi(lines[1]);
+			{num_error = atoi(lines[1]);
 				ops[i].f(stack, contador);
-				break;
-				printf("%d\n", num_error);
-			}
-		}
+				break; } }
 		else
-		{
-			cont_no_match++; }
+		{cont_no_match++; }
 	i++;
 	}
 	if (cont_no_match == 2)
-	{
-/*		printf("No concoe el comando %s que imprime la linea 0", lines[0]);*/
-		fprintf(stderr, "L%d: unknown instruction %s\n", contador, lines[0]);
+	{fprintf(stderr, "L%d: unknown instruction %s\n", contador, lines[0]);
 		free_grid(lines);
-		exit(EXIT_FAILURE);
-	}
-
-	printf("token: %s y numero: %s\n", lines[0], lines[1]);
+		exit(EXIT_FAILURE); }
 	if ((strcmp("push", lines[0]) == 0) && (ver_str(lines) == 0))
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", contador);
+	{fprintf(stderr, "L%d: usage: push integer\n", contador);
 /*		free_grid(lines);*/
-		exit(EXIT_FAILURE);
-	}
+		exit(EXIT_FAILURE); }
 	free(lines);
 /*	free_grid(lines);*/
 }
-
-/**
- *verif_second_string - calls different functions
- *@lines: pointer
- *Return: Always
- */
-int ver_str(char **lines)
-{
-	int i = 0;
-
-	while (lines[1][i])
-	{
-		if (strcmp(lines[0], "pall") == 0)
-		{
-			return (1);
-		}
-		if ((lines[1][i] >= 48 && lines[1][i] <= 57) || (lines[1][0] == '-'))
-		{
-			i++;
-		}
-		else
-		{
-			return (0);
-		}
-	}
-	return (1);
-}
-
-
 
