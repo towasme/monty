@@ -15,13 +15,14 @@ int main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		perror("USAGE: monty file\n");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	else
 	{
 		read_textfile(av[1], &stack);
 	}
+	free_stack_list(&stack);
 	return (0);
 }
 

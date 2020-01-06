@@ -64,7 +64,36 @@ void free_grid(char **grid)
 }
 
 /**
- *verif_second_string - calls different functions
+ * free_stack_list - free list
+ * @stack: pointer of a list
+ * Return: void
+ */
+
+void free_stack_list(stack_t **stack)
+{
+	stack_t *aux;
+
+	if (*stack == NULL)
+	{
+		return;
+	}
+	while (*stack)
+	{
+		aux = (*stack)->next;
+		free(*stack);
+		if (aux == NULL)
+		{
+			return;
+		}
+		aux->prev = NULL;
+		*stack = aux;
+	}
+	free(*stack);
+}
+
+
+/**
+ *ver_str - verifies if the function works
  *@lines: pointer
  *Return: Always
  */
@@ -74,7 +103,9 @@ int ver_str(char **lines)
 
 	while (lines[1][i])
 	{
-		if (strcmp(lines[0], "pall") == 0)
+		if ((strcmp(lines[0], "pall") == 0) || (strcmp(lines[0], "pop") == 0) ||
+		(strcmp(lines[0], "nop") == 0) || (strcmp(lines[0], "pint") == 0) ||
+		(strcmp(lines[0], "swap") == 0) || (strcmp(lines[0], "add") == 0))
 		{
 			return (1);
 		}

@@ -47,6 +47,7 @@ char **tokenize(char *args);
 void compare_string(char *buff, stack_t **stack, int contador);
 void free_grid(char **grid);
 int ver_str(char **lines);
+void free_stack_list(stack_t **stack);
 
 void op_push(stack_t **stack, unsigned int num);
 void op_pop(stack_t **stack, unsigned int num);

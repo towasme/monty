@@ -15,7 +15,7 @@ void op_push(stack_t **stack, unsigned int num)
 	(void)num;
 
 	if (new == NULL)
-		{perror("Error: malloc failed");
+		{fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE); }
 	if (*stack == NULL)
 	{
@@ -45,10 +45,15 @@ void op_pop(stack_t **stack, unsigned int num)
 {
 	stack_t *aux = *stack;
 
-	if (*stack == NULL || (*stack)->next == NULL)
+	if (*stack == NULL) 
 	{
 		fprintf(stderr, "L%d: can't pop an empty stack\n", num);
 		exit(EXIT_FAILURE);
+	}
+	if ((*stack)->next == NULL)
+	{
+		free(*stack);
+		*stack = NULL;
 	}
 	else
 	{
@@ -67,9 +72,11 @@ void op_pop(stack_t **stack, unsigned int num)
 
 void op_pall(stack_t **stack, unsigned int num)
 {
-	int counter = 0;
 	stack_t *aux = *stack;
 	(void)num;
+
+	if (stack == NULL)
+		exit(EXIT_FAILURE);
 
 	if (stack != NULL)
 	{
@@ -77,7 +84,6 @@ void op_pall(stack_t **stack, unsigned int num)
 		{
 			printf("%d\n", aux->n);
 			aux = aux->next;
-			counter++;
 		}
 	}
 }

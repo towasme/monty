@@ -25,17 +25,21 @@ void read_textfile(char *filename, stack_t **stack)
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
+/*
 	buff = malloc(sizeof(char) * 2000);
 	if (buff == NULL)
 	{
 		perror("Error: malloc failed");
 		exit(EXIT_FAILURE);
 	}
+*/
 	while (getline(&buff, &size, fd) != EOF)
 	{
 		if (strcmp(buff, "\n") != 0)
 		{
-/*			printf("%sbuff si es nullo", buff);*/
+/*
+			printf("%sbuff si es nullo", buff);
+*/
 			contador++;
 			compare_string(buff, stack, contador);
 		}
@@ -54,7 +58,7 @@ void read_textfile(char *filename, stack_t **stack)
 char **tokenize(char *args)
 {
 	int pos = 0;
-	char *len;
+	char *len = NULL;
 	char **lines = NULL;
 
 	lines = malloc(sizeof(char *) * 64);
@@ -79,6 +83,7 @@ char **tokenize(char *args)
 		len = strtok(NULL, " \n");
 		pos++;
 	}
+	free(len);
 	return (lines);
 }
 
@@ -97,12 +102,11 @@ void compare_string(char *buff, stack_t **stack, int contador)
 		instruction_t ops[] = {
 			{"push", op_push},
 			{"pall", op_pall},
-/*
-*			{"pop", op_pop},
-*			{"swap", op_swap},
-*			{"pint", op_pint},
-*			("nop", op_nop},
-*/
+			{"pop", op_pop},
+			{"swap", op_swap},
+			{"pint", op_pint},
+			{"nop", op_nop},
+			{"add", op_add},
 			{NULL, NULL}
 	};
 	lines = tokenize(buff);
@@ -120,7 +124,7 @@ void compare_string(char *buff, stack_t **stack, int contador)
 		{cont_no_match++; }
 	i++;
 	}
-	if (cont_no_match == 2)
+	if (cont_no_match == 7)
 	{fprintf(stderr, "L%d: unknown instruction %s\n", contador, lines[0]);
 		free_grid(lines);
 		exit(EXIT_FAILURE); }
@@ -128,7 +132,7 @@ void compare_string(char *buff, stack_t **stack, int contador)
 	{fprintf(stderr, "L%d: usage: push integer\n", contador);
 /*		free_grid(lines);*/
 		exit(EXIT_FAILURE); }
-	free(lines);
 /*	free_grid(lines);*/
+	free(lines);
 }
 
