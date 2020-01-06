@@ -105,7 +105,8 @@ int ver_str(char **lines)
 	{
 		if ((strcmp(lines[0], "pall") == 0) || (strcmp(lines[0], "pop") == 0) ||
 		(strcmp(lines[0], "nop") == 0) || (strcmp(lines[0], "pint") == 0) ||
-		(strcmp(lines[0], "swap") == 0) || (strcmp(lines[0], "add") == 0))
+		(strcmp(lines[0], "swap") == 0) || (strcmp(lines[0], "add") == 0) ||
+		(strcmp(lines[0], "sub") == 0))
 		{
 			return (1);
 		}

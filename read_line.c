@@ -104,6 +104,7 @@ void compare_string(char *buff, stack_t **stack, int contador)
 			{"pint", op_pint},
 			{"nop", op_nop},
 			{"add", op_add},
+			{"sub", op_sub},
 			{NULL, NULL}
 	};
 	lines = tokenize(buff);
@@ -121,7 +122,7 @@ void compare_string(char *buff, stack_t **stack, int contador)
 		{cont_no_match++; }
 	i++;
 	}
-	if (cont_no_match == 7)
+	if (cont_no_match == 8)
 	{fprintf(stderr, "L%d: unknown instruction %s\n", contador, lines[0]);
 		free_grid(lines);
 		exit(EXIT_FAILURE); }
