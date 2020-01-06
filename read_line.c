@@ -26,20 +26,17 @@ void read_textfile(char *filename, stack_t **stack)
 		exit(EXIT_FAILURE);
 	}
 /*
-	buff = malloc(sizeof(char) * 2000);
-	if (buff == NULL)
-	{
-		perror("Error: malloc failed");
-		exit(EXIT_FAILURE);
-	}
+*	buff = malloc(sizeof(char) * 2000);
+*	if (buff == NULL)
+*	{
+*		perror("Error: malloc failed");
+*		exit(EXIT_FAILURE);
+*	}
 */
 	while (getline(&buff, &size, fd) != EOF)
 	{
 		if (strcmp(buff, "\n") != 0)
 		{
-/*
-			printf("%sbuff si es nullo", buff);
-*/
 			contador++;
 			compare_string(buff, stack, contador);
 		}

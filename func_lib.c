@@ -45,7 +45,7 @@ void op_pop(stack_t **stack, unsigned int num)
 {
 	stack_t *aux = *stack;
 
-	if (*stack == NULL) 
+	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%d: can't pop an empty stack\n", num);
 		exit(EXIT_FAILURE);
