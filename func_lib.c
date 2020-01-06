@@ -128,3 +128,4 @@ void op_swap(stack_t **stack, unsigned int num)
 		(*stack)->next->n = num_swap;
 	}
 }
+
