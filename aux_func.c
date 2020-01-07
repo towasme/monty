@@ -16,7 +16,7 @@ void op_add(stack_t **stack, unsigned int num)
 
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
-		fprintf(stderr, "L%d : can't add, stack too short\n", num);
+		fprintf(stderr, "L%d: can't add, stack too short\n", num);
 		exit(EXIT_FAILURE);
 	}
 

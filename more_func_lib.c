@@ -13,7 +13,7 @@ void op_sub(stack_t **stack, unsigned int num)
 
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
-		fprintf(stderr, "L%d : can't sub stack too short\n", num);
+		fprintf(stderr, "L%d: can't sub, stack too short\n", num);
 		exit(EXIT_FAILURE);
 	}
 

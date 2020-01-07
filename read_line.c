@@ -25,18 +25,11 @@ void read_textfile(char *filename, stack_t **stack)
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
-/*
-*	buff = malloc(sizeof(char) * 2000);
-*	if (buff == NULL)
-*	{
-*		perror("Error: malloc failed");
-*		exit(EXIT_FAILURE);
-*	}
-*/
 	while (getline(&buff, &size, fd) != EOF)
 	{
 		if (strcmp(buff, "\n") != 0)
 		{
+		/*comprobar si lo primero que llega de getline en el primer earray es valido, entonces que si entre,se haec por medio de una funcion que compare*/
 			contador++;
 			compare_string(buff, stack, contador);
 		}
