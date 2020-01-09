@@ -33,6 +33,10 @@ void read_textfile(char *filename, stack_t **stack)
 			contador++;
 			compare_string(buff, stack, contador);
 		}
+		else if (strcmp(buff, "\n") == 0)
+		{
+			contador++;
+		}
 	}
 	fclose(fd);
 	free(buff);
