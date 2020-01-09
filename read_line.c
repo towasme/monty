@@ -121,7 +121,7 @@ void compare_string(char *buff, stack_t **stack, int contador)
 	}
 	if (cont_no_match == 8)
 	{fprintf(stderr, "L%d: unknown instruction %s\n", contador, lines[0]);
-		free_grid(lines);
+/*		free(lines);*/
 		exit(EXIT_FAILURE); }
 	if ((strcmp("push", lines[0]) == 0) && (ver_str(lines) == 0))
 	{fprintf(stderr, "L%d: usage: push integer\n", contador);
