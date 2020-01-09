@@ -62,16 +62,13 @@ char **tokenize(char *args)
 	}
 
 	len = strtok(args, " \n\t");
-/*	printf("%slen si es nullo", len);*/
 	if (len == NULL)
 	{
-/*		printf("%slines si es nullo", lines[0]);*/
 		free(len);
 		return (NULL);
 	}
 	while (len)
 	{
-/*		printf("tokens de la linea [%d] token correspondiente:%s\n", pos, len);*/
 		lines[pos] = len;
 		len = strtok(NULL, " \n");
 		pos++;
