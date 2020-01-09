@@ -29,7 +29,6 @@ void read_textfile(char *filename, stack_t **stack)
 	{
 		if (strcmp(buff, "\n") != 0)
 		{
-		/*comprobar si lo primero que llega de getline en el primer earray es valido, entonces que si entre,se haec por medio de una funcion que compare*/
 			contador++;
 			compare_string(buff, stack, contador);
 		}
